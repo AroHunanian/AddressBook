@@ -1,0 +1,82 @@
+﻿@model IEnumerable<Category>
+@{
+    ViewData["Title"] = "Index";
+}
+
+
+<div class="container p-3 ">
+    <div class="row pt-4">
+
+
+        <div class="col-6">
+            <h2 class="text-primary">Address List </h2>
+        </div>
+        <div class="col-6 text-end">
+            <a asp-action="Create" asp-controller="Category" class="btn btn-primary">
+                <i class="bi bi-plus-circle"></i> &nbsp; Create New Contact
+            </a>
+        </div>
+    </div>
+    <br />
+
+    <table class="table table-bordered table-stripped" style="width:100%">
+        <thead>
+            <tr>
+                <th>
+                    Full Name
+                </th>
+                <th>
+                    Email
+                </th>
+                <th>
+                    Phone Number
+                </th>
+                <th>
+                    Physical Address
+                </th>
+                <th></th>
+                <th></th>
+                <th></th>
+
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @item.FullName
+                    </td>
+                    <td>
+                        @item.Email
+                    </td>
+                    <td>
+                        @item.PhoneNumber
+                    </td>
+                    <td>
+                        @item.PhysicalAddress
+                    </td>
+                    <td>
+                        <div class="w-75 btn-group" role="group">
+                            <a asp-controller="Category" asp-action="Edit" asp-route-id="@item.Id"
+                           class="btn btn-primary mx-2"><i class="bi bi-pencil-square"></i> Edit</a>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="w-75 btn-group" role="group">
+                            <a asp-controller="Category" asp-action="Delete" asp-route-id="@item.Id"
+                           class="btn btn-warning mx-2"><i class="bi bi-trash3-fill"></i> Delete</a>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="w-75 btn-group" role="group">
+                            <a asp-controller="Category" asp-action="Details" asp-route-id="@item.Id"
+                           class="btn btn-info"><i class="bi bi-arrow-up-left-square"></i> View</a>
+                        </div>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+

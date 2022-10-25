@@ -1,4 +1,4 @@
-﻿@model WebApp.Models.Category
+﻿@model WebApp.Models.User
 
 @{
     ViewData["Title"] = "Details";
@@ -37,10 +37,10 @@
     </dl>
 </div>
 <div>
-    <a asp-controller="Category" asp-action="Edit" asp-route-id="@Model?.Id" class="btn btn-primary" style="width:150px">
+    <a asp-controller="User" asp-action="Edit" asp-route-id="@Model?.Id" class="btn btn-primary" style="width:150px">
         Edit
     </a>
-    <a asp-controller="Category" asp-action="Index" class="btn btn-secondary" style="width:150px">
+    <a asp-controller="User" asp-action="Index" class="btn btn-secondary" style="width:150px">
         Back to List
     </a>
 </div>

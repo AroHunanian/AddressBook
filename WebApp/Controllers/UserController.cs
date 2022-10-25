@@ -5,35 +5,35 @@ using WebApp.Models;
 
 namespace WebApp.Controllers
 {
-    public class CategoryController : Controller
+    public class UserController : Controller
     {
         private readonly ApplicationDbContext _db;
-        public CategoryController(ApplicationDbContext db)
+
+        public UserController(ApplicationDbContext db)
         {
             _db = db;
         }
-    
+
         public IActionResult Index()
         {
-            IEnumerable<Category> objCategoryList = _db.Categories;
-            return View(objCategoryList);
+            IEnumerable<User> user = _db.Users;
+            return View(user);
         }
-        // GET: CategoriesTemp/Details/5
-        public async Task<IActionResult> Details(int? id)
+
+        // GET
+        public  IActionResult Details(int? id)
         {
-            if (id == null || _db.Categories == null)
+            if (id == null || _db.Users == null)
+            {
+                return NotFound();
+            }
+            var user = _db.Users.Find(id);
+            if (user == null)
             {
                 return NotFound();
             }
 
-            var category = await _db.Categories
-                .FirstOrDefaultAsync(m => m.Id == id);
-            if (category == null)
-            {
-                return NotFound();
-            }
-
-            return View(category);
+            return View(user);
         }
 
         //Get
@@ -41,49 +41,47 @@ namespace WebApp.Controllers
         {
             return View();
         }
+
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Create(Category category)
+        public IActionResult Create(User user)
         {
-         
             if (ModelState.IsValid)
             {
-                _db.Categories.Add(category);
+                _db.Users.Add(user);
                 _db.SaveChanges();
                 TempData["success"] = "New Address Created Successfully";
                 return RedirectToAction("Index");
             }
-            return View(category);
-            
+            return View(user);
         }
 
         public IActionResult Edit(int? id)
         {
-            if(id ==null || id == 0)
+            if (id == null || id == 0)
             {
                 return NotFound();
             }
-             var objCategory = _db.Categories.Find(id);
-            if(objCategory == null)
+            var user = _db.Users.Find(id);
+            if (user == null)
             {
                 return NotFound();
             }
-            return View(objCategory);
+            return View(user);
         }
+
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Edit(Category category)
+        public IActionResult Edit(User user)
         {
-
             if (ModelState.IsValid)
             {
-                _db.Categories.Update(category);
+                _db.Users.Update(user);
                 _db.SaveChanges();
                 TempData["success"] = "Address Edited Successfully";
                 return RedirectToAction("Index");
             }
-            return View(category);
-
+            return View(user);
         }
 
         public IActionResult Delete(int? id)
@@ -92,25 +90,22 @@ namespace WebApp.Controllers
             {
                 return NotFound();
             }
-            var objCategory = _db.Categories.Find(id);
-            if (objCategory == null)
+            var user = _db.Users.Find(id);
+            if (user == null)
             {
                 return NotFound();
             }
-            return View(objCategory);
+            return View(user);
         }
+
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Delete(Category category)
+        public IActionResult Delete(User user)
         {
-
-           
-                _db.Categories.Remove(category);
-                _db.SaveChanges();
-                TempData["success"] = "Address Deleted Successfully";
+            _db.Users.Remove(user);
+            _db.SaveChanges();
+            TempData["success"] = "Address Deleted Successfully";
             return RedirectToAction("Index");
-            
-          
 
         }
     }

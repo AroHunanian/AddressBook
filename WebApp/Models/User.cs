@@ -15,5 +15,7 @@ namespace WebApp.Models
         public int PhoneNumber { get; set; }
         
         public string? PhysicalAddress { get; set; }
+
+        
     }
 }

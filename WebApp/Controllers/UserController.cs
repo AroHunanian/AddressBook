@@ -7,7 +7,7 @@ namespace WebApp.Controllers
 {
     public class UserController : Controller
     {
-        private readonly ApplicationDbContext _db;
+        private readonly IApplicationDbContext _db;
 
         public UserController(ApplicationDbContext db)
         {
